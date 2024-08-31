@@ -14,7 +14,7 @@ vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 
 vim.opt.signcolumn = 'yes'
 
-
+vim.opt.formatoptions = 'tc'
 
 vim.opt.cursorline = true
 
@@ -72,9 +72,9 @@ require("lazy").setup({
 				delete = { text = '_'},
 				topdelete = { text = '‾'},
 				changedelete = { text = '~'},
-			},},}
-	},
-	{ -- Fuzzy Finder (files, lsp, etc)
+			},},
+		},
+		{ -- Fuzzy Finder (files, lsp, etc)
 		'nvim-telescope/telescope.nvim',
 		event = 'VimEnter',
 		branch = '0.1.x',
@@ -145,14 +145,14 @@ require("lazy").setup({
 					local builtin = require 'telescope.builtin'
 					vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
 					vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-					vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+					vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = '[S]earch [F]iles' })
 					vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
 					vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
 					vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
 					vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 					vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-					vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-					vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+					vim.keymap.set('n', '<leader>s.', builtin.oldfiles, {desc = '[S]earch Recent Files ("." for repeat)' })
+					vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
 					-- Slightly advanced example of overriding default behavior and theme
 					vim.keymap.set('n', '<leader>/', function()
@@ -177,7 +177,8 @@ require("lazy").setup({
 						builtin.find_files { cwd = vim.fn.stdpath 'config' }
 					end, { desc = '[S]earch [N]eovim files' })
 				end,
-			},
+				},
+		},
 
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
