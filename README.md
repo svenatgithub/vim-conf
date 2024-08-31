@@ -4,7 +4,7 @@
 
 
 ## Package list
-
+* lazy
 * telescope
 * gitsigns
 * oil
