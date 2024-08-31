@@ -7,21 +7,34 @@ vim.opt.mouse = 'a'
 
 vim.opt.showmode = false
 
-
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 
 vim.opt.signcolumn = 'yes'
-
-vim.opt.formatoptions = 'tc'
+vim.opt.wrap = false
 
 vim.opt.cursorline = true
 
-
+vim.opt.splitright = true
 
 vim.opt.scrolloff = 10
+
 vim.opt.hlsearch = true 
+
+
+
+
+
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+-- open the file manager
+vim.keymap.set("n", "<leader>c", "<CMD>Oil<CR>", { desc = "Open the filemanager" })
+
+
+
+
+
+
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking text",
@@ -152,26 +165,26 @@ require("lazy").setup({
 				{
 					'echasnovski/mini.nvim',
 					config = function()
-						-- Simple and easy statusline.
-						--  You could remove this setup call if you don't like it,
-						--  and try some other statusline plugin
 						local statusline = require 'mini.statusline'
 						-- set use_icons to true if you have a Nerd Font
-						statusline.setup { use_icons = vim.g.have_nerd_font }
+						statusline.setup { use_icons = true } 
 
-						-- You can configure sections in the statusline by overriding their
-						-- default behavior. For example, here we set the section for
-						-- cursor location to LINE:COLUMN
-						---@diagnostic disable-next-line: duplicate-set-field
 						statusline.section_location = function()
 							return '%2l:%-2v'
 						end
-
-						-- ... and there is more!
-						--  Check out: https://github.com/echasnovski/mini.nvim
 					end,
+			
 				},
-
+			-- File manager
+			{
+				'stevearc/oil.nvim',
+				---@module 'oil'
+				---@type oil.SetupOpts
+				opts = {},
+				-- Optional dependencies
+				dependencies = { { "echasnovski/mini.icons", opts = {} } },
+				-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+			},
 		},
 
 	-- Configure any other settings here. See the documentation for more details.

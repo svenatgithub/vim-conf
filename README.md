@@ -10,7 +10,7 @@
 * oil
 * lsp
 * treesitter
-* 
+* mini statusbar 
 
 
 
