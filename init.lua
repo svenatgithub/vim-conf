@@ -1,3 +1,9 @@
+-- To-Do
+-- Treesitter 
+-- Autopairs
+-- bracket line plugin
+-- file tree
+-- undo tree
 vim.g.mapleader = ' ' 
 
 
