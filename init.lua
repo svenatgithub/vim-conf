@@ -8,6 +8,8 @@
 -- git fugitive
 -- div view nvim
 -- Harpoon
+
+-- [ Settings ]
 vim.g.mapleader = ' ' 
 vim.g.neovide_transparency = 0.8
 
@@ -28,6 +30,9 @@ vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 vim.opt.signcolumn = 'yes'
 vim.opt.wrap = false
 
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
 vim.opt.cursorline = true
 
 vim.opt.splitright = true
@@ -36,6 +41,7 @@ vim.opt.scrolloff = 15
 
 vim.opt.hlsearch = true 
 
+-- [ Settings ]
 
 -- [ Autocommands, autocmd ]
 
@@ -47,12 +53,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-
 -- [ Autocommands, autocmd ]
 
 
 
--- [ Lazy ]
+-- [ Lazy, Package manager ]
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
