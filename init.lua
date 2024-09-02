@@ -32,7 +32,7 @@ vim.opt.cursorline = true
 
 vim.opt.splitright = true
 
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 15
 
 vim.opt.hlsearch = true 
 
@@ -163,6 +163,7 @@ require("lazy").setup({
 	checker = { enabled = true },
 })
 -- [ Lazy ]
+
 -- [ Keymaps, Hotkeys ]
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
