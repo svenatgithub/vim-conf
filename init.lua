@@ -4,6 +4,7 @@
 -- bracket line plugin
 -- file tree
 -- undo tree
+-- colorscheme molokai
 vim.g.mapleader = ' ' 
 
 
@@ -11,6 +12,10 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.opt.mouse = 'a'
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
 vim.opt.showmode = false
 
