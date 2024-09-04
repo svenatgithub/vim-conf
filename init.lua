@@ -2,7 +2,6 @@
 -- Treesitter 
 -- bracket line plugin
 -- undo tree
--- colorscheme molokai
 -- git fugitive
 -- div view nvim
 -- Harpoon
@@ -82,6 +81,8 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
+        -- Colorscheme
+        {"tanvirtin/monokai.nvim"},
 		-- Git helper
 		{"lewis6991/gitsigns.nvim",
 		opts = {
