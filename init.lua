@@ -1,6 +1,5 @@
 -- [ TO-DO ]
 -- Treesitter 
--- Autopairs
 -- bracket line plugin
 -- undo tree
 -- colorscheme molokai
@@ -10,8 +9,8 @@
 -- [ TO-DO ]
 
 -- [ Settings ]
-vim.g.mapleader = ' ' 
-vim.g.neovide_transparency = 0.8
+vim.g.mapleader = ' '
+vim.g.neovide_transparency = 0.95
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -37,7 +36,7 @@ vim.opt.cursorline = true
 
 vim.opt.splitright = true
 
-vim.opt.scrolloff = 15
+vim.opt.scrolloff = 20
 
 vim.opt.hlsearch = true
 
@@ -95,70 +94,54 @@ require("lazy").setup({
 			},},
 		},
 		-- Fuzzy Finder (files, lsp, etc)
-		{ 
-		'nvim-telescope/telescope.nvim',
+		{'nvim-telescope/telescope.nvim',
 		event = 'VimEnter',
 		branch = '0.1.x',
 		dependencies = {
 			'nvim-lua/plenary.nvim',
-			{ -- If encountering errors, see telescope-fzf-native README for installation instructions
-				'nvim-telescope/telescope-fzf-native.nvim',
+			{'nvim-telescope/telescope-fzf-native.nvim',
 				build = 'make',
 				cond = function()
 					return vim.fn.executable 'make' == 1
 				end,
 			},
 			{ 'nvim-telescope/telescope-ui-select.nvim' },
-
-			-- Useful for getting pretty icons, but requires a Nerd Font.
-			{ 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+			{ 'nvim-tree/nvim-web-devicons', enabled = true },
 		},
 		config = function()
-			require('telescope').setup {
-				-- defaults = {
-					--   mappings = {
-						--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-						--   },
-						-- },
-						-- pickers = {}
-						extensions = {
-							['ui-select'] = {
-								require('telescope.themes').get_dropdown(),
-							},
-						},
-					}
-
-					-- Enable Telescope extensions if they are installed
-					pcall(require('telescope').load_extension, 'fzf')
-					pcall(require('telescope').load_extension, 'ui-select')
-
-					-- See `:help telescope.builtin`
-				end,
+		require('telescope').setup {
+				extensions = {
+					['ui-select'] = {
+						require('telescope.themes').get_dropdown(),
+					},
 				},
-				-- Collection of various small independent plugins/modules
-				{
-					'echasnovski/mini.nvim',
-					config = function()
-						local statusline = require 'mini.statusline'
-						-- set use_icons to true if you have a Nerd Font
-						statusline.setup { use_icons = true } 
+			}
+			pcall(require('telescope').load_extension, 'fzf')
+			pcall(require('telescope').load_extension, 'ui-select')
+			end,
+		},
+		-- Collection of various small independent plugins/modules
+        {'echasnovski/mini.nvim',
+                config = function()
+                    local statusline = require 'mini.statusline'
+                    statusline.setup { use_icons = true } 
 
-						statusline.section_location = function()
-							return '%2l:%-2v'
-						end
-					end,
-			
-				},
-			-- File manager
-			{
-				'stevearc/oil.nvim',
-				---@module 'oil'
-				---@type oil.SetupOpts
-				opts = {},
-				-- Optional dependencies
-				dependencies = { { "echasnovski/mini.icons", opts = {} } },
-				-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
-			},
+                    statusline.section_location = function()
+                        return '%2l:%-2v'
+                    end
+                end,
+
+        },
+		-- File manager
+        {'stevearc/oil.nvim',
+            opts = {},
+            dependencies = { { "echasnovski/mini.icons", opts = {} } },
+        },
+        -- auto close stuff
+        {"windwp/nvim-autopairs",
+            even = "InsertEnter",
+            config = true
+        },
 		},
 
 	-- Configure any other settings here. See the documentation for more details.
