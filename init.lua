@@ -1,13 +1,13 @@
--- To-Do
+-- [ TO-DO ]
 -- Treesitter 
 -- Autopairs
 -- bracket line plugin
--- file tree
 -- undo tree
 -- colorscheme molokai
 -- git fugitive
 -- div view nvim
 -- Harpoon
+-- [ TO-DO ]
 
 -- [ Settings ]
 vim.g.mapleader = ' ' 
@@ -39,7 +39,7 @@ vim.opt.splitright = true
 
 vim.opt.scrolloff = 15
 
-vim.opt.hlsearch = true 
+vim.opt.hlsearch = true
 
 -- [ Settings ]
 
@@ -202,7 +202,7 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 -- It's also possible to pass additional configuration options.
---  See `:help telescope.builtin.live_grep()` for information about particular keys
+
 vim.keymap.set('n', '<leader>s/', function()
     builtin.live_grep {
         grep_open_files = true,
