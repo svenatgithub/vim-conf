@@ -11,6 +11,11 @@
 * lsp
 * treesitter
 * mini statusbar 
+* autopairs
+* treesitter
+* lspconfig
+* mason
+* nvim-cmp
 
 
 
