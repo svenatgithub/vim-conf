@@ -1,6 +1,4 @@
 -- [ TO-DO ]
--- Treesitter 
--- bracket line plugin
 -- undo tree
 -- git fugitive
 -- div view nvim
@@ -29,7 +27,7 @@ vim.opt.signcolumn = 'yes'
 vim.opt.wrap = false
 
 vim.opt.list = true
-vim.opt.listchars = { space = ' ', multispace = '---+', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { multispace = '---+', trail = '·', nbsp = '␣' }
 
 vim.opt.cursorline = true
 
