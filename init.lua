@@ -121,7 +121,7 @@ require("lazy").setup({
         {'echasnovski/mini.nvim',
                 config = function()
                     local statusline = require 'mini.statusline'
-                    statusline.setup { use_icons = true } 
+                    statusline.setup { use_icons = true }
 
                     statusline.section_location = function()
                         return '%2l:%-2v'
@@ -440,6 +440,9 @@ require("lazy").setup({
 })
 -- [ Lazy ]
 -- require('monokai').setup { palette = require('monokai').pro }
+vim.api.nvim_set_hl(0,"Normal", { bg = "none" })
+vim.api.nvim_set_hl(0,"NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0,"ErrorMsg", { bg = "none" })
 -- [ Keymaps, Hotkeys ]
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
