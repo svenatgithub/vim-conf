@@ -24,7 +24,6 @@
  - "nvim-lspconfig"
  - "nvim-treesitter"
  - "nvim-web-devicons"
- - "oil.nvim"
  - "plenary.nvim"
  - "telescope-fzf-native.nvim"
  - "telescope-ui-select.nvim"
