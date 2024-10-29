@@ -1,10 +1,8 @@
 -- [ TO-DO ]
--- undo tree
--- git fugitive
+-- undo tree git fugitive
 -- div view nvim
 -- Harpoon
 -- [ TO-DO ]
-
 -- [ Settings ]
 vim.g.mapleader = ' '
 vim.g.neovide_transparency = 0.95
@@ -34,19 +32,23 @@ vim.opt.cursorline = true
 vim.opt.splitright = true
 
 vim.opt.scrolloff = 20
+vim.opt.sidescrolloff = 8
 
 vim.opt.hlsearch = true
-
+-- netrw
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+vim.cmd("set path+=**")
 -- [ Settings ]
 
 -- [ Autocommands, autocmd ]
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking text",
-	group = vim.api.nvim_create_augroup("highlight-yank",{ clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+    desc = "Highlight when yanking text",
+    group = vim.api.nvim_create_augroup("highlight-yank",{ clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 -- [ Autocommands, autocmd ]
@@ -55,17 +57,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
-			{ "\nPress any key to exit..." },
-		}, true, {})
-		vim.fn.getchar()
-		os.exit(1)
-	end
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out, "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -76,48 +78,48 @@ vim.g.maplocalleader = "\\"
 
 -- Setup lazy.nvim
 require("lazy").setup({
-	spec = {
+    spec = {
         -- Colorscheme
         {"tanvirtin/monokai.nvim"},
-		-- Git helper
-		{"lewis6991/gitsigns.nvim",
-		opts = {
-			signs = {
-				add = { text = '+' },
-				change = { text = '~'},
-				delete = { text = '_'},
-				topdelete = { text = '‾'},
-				changedelete = { text = '~'},
-			},},
-		},
-		-- Fuzzy Finder (files, lsp, etc)
-		{'nvim-telescope/telescope.nvim',
-		event = 'VimEnter',
-		branch = '0.1.x',
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-			{'nvim-telescope/telescope-fzf-native.nvim',
-				build = 'make',
-				cond = function()
-					return vim.fn.executable 'make' == 1
-				end,
-			},
-			{ 'nvim-telescope/telescope-ui-select.nvim' },
-			{ 'nvim-tree/nvim-web-devicons', enabled = true },
-		},
-		config = function()
-		require('telescope').setup {
-				extensions = {
-					['ui-select'] = {
-						require('telescope.themes').get_dropdown(),
-					},
-				},
-			}
-			pcall(require('telescope').load_extension, 'fzf')
-			pcall(require('telescope').load_extension, 'ui-select')
-			end,
-		},
-		-- Collection of various small independent plugins/modules
+        -- Git helper
+        {"lewis6991/gitsigns.nvim",
+        opts = {
+            signs = {
+                add = { text = '+' },
+                change = { text = '~'},
+                delete = { text = '_'},
+                topdelete = { text = '‾'},
+                changedelete = { text = '~'},
+            },},
+        },
+        -- Fuzzy Finder (files, lsp, etc)
+        {'nvim-telescope/telescope.nvim',
+        event = 'VimEnter',
+        branch = '0.1.x',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            {'nvim-telescope/telescope-fzf-native.nvim',
+            build = 'make',
+            cond = function()
+                return vim.fn.executable 'make' == 1
+            end,
+        },
+        { 'nvim-telescope/telescope-ui-select.nvim' },
+        { 'nvim-tree/nvim-web-devicons', enabled = true },
+    },
+    config = function()
+        require('telescope').setup {
+            extensions = {
+                ['ui-select'] = {
+                    require('telescope.themes').get_dropdown(),
+                },
+            },
+        }
+        pcall(require('telescope').load_extension, 'fzf')
+        pcall(require('telescope').load_extension, 'ui-select')
+    end,
+},
+-- Collection of various small independent plugins/modules
         {'echasnovski/mini.nvim',
                 config = function()
                     local statusline = require 'mini.statusline'
@@ -129,11 +131,6 @@ require("lazy").setup({
                 end,
 
         },
-		-- File manager
-        {'stevearc/oil.nvim',
-            opts = {},
-            dependencies = { { "echasnovski/mini.icons", opts = {} } },
-        },
         -- auto close stuff
         {"windwp/nvim-autopairs",
             even = "InsertEnter",
@@ -142,7 +139,7 @@ require("lazy").setup({
         {'nvim-treesitter/nvim-treesitter',
             build = ':TSUpdate',
             opts = {
-                ensure_installed = { 'bash', 'python', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+                ensure_installed = {},
                 -- Autoinstall languages that are not installed
                 auto_install = true,
                 highlight = {
@@ -151,7 +148,7 @@ require("lazy").setup({
                 },
                 indent = { enable = true, disable = { 'ruby' } },
             },
-	},
+        },
     {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
@@ -280,7 +277,6 @@ require("lazy").setup({
               group = highlight_augroup,
               callback = vim.lsp.buf.clear_references,
             })
-
             vim.api.nvim_create_autocmd('LspDetach', {
               group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
               callback = function(event2)
@@ -439,14 +435,13 @@ require("lazy").setup({
  checker = { enabled = true },
 })
 -- [ Lazy ]
--- require('monokai').setup { palette = require('monokai').pro }
 vim.api.nvim_set_hl(0,"Normal", { bg = "none" })
 vim.api.nvim_set_hl(0,"NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0,"ErrorMsg", { bg = "none" })
 -- [ Keymaps, Hotkeys ]
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "<leader>c", "<CMD>Oil<CR>", { desc = "Open the filemanager" })
+vim.keymap.set("n", "<leader>c", ":Explore<CR>", { desc = "Open the filemanager" })
 
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move marked text dow'})
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move marked text up'})
@@ -488,5 +483,11 @@ end, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>sn', function()
     builtin.find_files { cwd = vim.fn.stdpath 'config' }
 end, { desc = '[S]earch [N]eovim files' })
-
 -- [ Keymaps ]
+
+require('monokai').setup {
+    palette = require('monokai')
+}
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
