@@ -18,7 +18,6 @@
  - "mason.nvim"
  - "mini.icons"
  - "mini.nvim"
- - "monokai.nvim"
  - "nvim-autopairs"
  - "nvim-cmp"
  - "nvim-lspconfig"

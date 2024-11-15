@@ -1,9 +1,12 @@
 -- [ TO-DO ]
 -- undo tree git fugitive
--- div view nvim
--- Harpoon
+-- div view nvim Harpoon
 -- [ TO-DO ]
 -- [ Settings ]
+-- Colorscheme Name
+-- Or <Leader>cs
+local color = "desert"
+
 vim.g.mapleader = ' '
 vim.g.neovide_transparency = 0.95
 
@@ -25,24 +28,21 @@ vim.opt.signcolumn = 'yes'
 vim.opt.wrap = false
 
 vim.opt.list = true
-vim.opt.listchars = { multispace = '---+', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { multispace = '.', trail = '·', nbsp = '␣' }
 
 vim.opt.cursorline = true
-
+vim.g.undotree_WindowLayout = 2
 vim.opt.splitright = true
 
-vim.opt.scrolloff = 20
+vim.opt.scrolloff = 15
 vim.opt.sidescrolloff = 8
 
 vim.opt.hlsearch = true
 -- netrw
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
-vim.cmd("set path+=**")
--- [ Settings ]
 
 -- [ Autocommands, autocmd ]
-
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
     group = vim.api.nvim_create_augroup("highlight-yank",{ clear = true }),
@@ -50,8 +50,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
 })
-
--- [ Autocommands, autocmd ]
 
 -- [ Lazy, Package manager ]
 -- Bootstrap lazy.nvim
@@ -79,8 +77,6 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
     spec = {
-        -- Colorscheme
-        {"tanvirtin/monokai.nvim"},
         -- Git helper
         {"lewis6991/gitsigns.nvim",
         opts = {
@@ -131,13 +127,14 @@ require("lazy").setup({
                 end,
 
         },
+        {"mbbill/undotree"},
         -- auto close stuff
         {"windwp/nvim-autopairs",
             even = "InsertEnter",
             config = true
         },
         {'nvim-treesitter/nvim-treesitter',
-            build = ':TSUpdate',
+            build = ':silent TSUpdate',
             opts = {
                 ensure_installed = {},
                 -- Autoinstall languages that are not installed
@@ -430,22 +427,19 @@ require("lazy").setup({
 
  -- Configure any other settings here. See the documentation for more details.
  -- colorscheme that will be used when installing plugins.
- install = { colorscheme = { "default" } },
+ install = { colorscheme = { color } },
  -- automatically check for plugin updates
- checker = { enabled = true },
+ checker = { enabled = true , notify = false },
 })
--- [ Lazy ]
-vim.api.nvim_set_hl(0,"Normal", { bg = "none" })
-vim.api.nvim_set_hl(0,"NormalFloat", { bg = "none" })
-vim.api.nvim_set_hl(0,"ErrorMsg", { bg = "none" })
 -- [ Keymaps, Hotkeys ]
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "<leader>c", ":Explore<CR>", { desc = "Open the filemanager" })
+vim.keymap.set("n", "<leader>c", vim.cmd.Ex, { desc = "Open the filemanager" })
 
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move marked text dow'})
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move marked text up'})
 
+vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle, {desc = "Toggle Undotree"})
 
 local builtin = require 'telescope.builtin'
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -459,7 +453,8 @@ vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]re
 vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>s.', builtin.oldfiles, {desc = '[S]earch Recent Files ("." for repeat)' })
-vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>cs', builtin.colorscheme, { desc = 'List all Colorschemes' })
 
 -- Slightly advanced example of overriding default behavior and theme
 vim.keymap.set('n', '<leader>/', function()
@@ -481,13 +476,12 @@ end, { desc = '[S]earch [/] in Open Files' })
 
 -- Shortcut for searching your Neovim configuration files
 vim.keymap.set('n', '<leader>sn', function()
-    builtin.find_files { cwd = vim.fn.stdpath 'config' }
+    builtin.find_files { cwd = '/home/me/code/git/vim-conf/' }
 end, { desc = '[S]earch [N]eovim files' })
--- [ Keymaps ]
 
-require('monokai').setup {
-    palette = require('monokai')
-}
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-
+-- Shortcut for searching config files
+vim.keymap.set('n', '<leader>sc', function()
+    builtin.find_files { cwd = '/home/me/.config/'}
+end, { desc = 'Search in My Config Files' })
+-- [ Colorscheme ]
+vim.cmd.colorscheme(color)
