@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+read -r -d '' VAR << EOM
+#!/usr/bin/python3
+###
+### 
+### Project Name:
+###
+### Date: $(date)
+### By: Sven Ochmann
+###
+
+
+
+if __name__ == "__main__":
+    print("Grüß Gott")
+EOM
+
+echo "$VAR"
