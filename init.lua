@@ -5,7 +5,7 @@
 -- [ Settings ]
 -- Colorscheme Name
 -- Or <Leader>cs
-local color = "desert"
+local color = "default"
 
 vim.g.mapleader = ' '
 vim.g.neovide_transparency = 0.95
@@ -136,7 +136,7 @@ require("lazy").setup({
         {'nvim-treesitter/nvim-treesitter',
             build = ':silent TSUpdate',
             opts = {
-                ensure_installed = {},
+                ensure_installed = {"python"},
                 -- Autoinstall languages that are not installed
                 auto_install = true,
                 highlight = {
@@ -433,6 +433,9 @@ require("lazy").setup({
 })
 -- [ Keymaps, Hotkeys ]
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+-- custom snippets
+vim.keymap.set("n", ",py", ":-1read !$HOME/.vim/snip/snippet.python<CR>")
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 vim.keymap.set("n", "<leader>c", vim.cmd.Ex, { desc = "Open the filemanager" })
 
@@ -475,7 +478,7 @@ vim.keymap.set('n', '<leader>s/', function()
 end, { desc = '[S]earch [/] in Open Files' })
 
 -- Shortcut for searching your Neovim configuration files
-vim.keymap.set('n', '<leader>sn', function()
+vim.keymap.set('n', '<leader>vc', function()
     builtin.find_files { cwd = '/home/me/code/git/vim-conf/' }
 end, { desc = '[S]earch [N]eovim files' })
 
@@ -483,5 +486,6 @@ end, { desc = '[S]earch [N]eovim files' })
 vim.keymap.set('n', '<leader>sc', function()
     builtin.find_files { cwd = '/home/me/.config/'}
 end, { desc = 'Search in My Config Files' })
+
 -- [ Colorscheme ]
 vim.cmd.colorscheme(color)
