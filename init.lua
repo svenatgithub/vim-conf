@@ -5,7 +5,7 @@
 -- [ Settings ]
 -- Colorscheme Name
 -- Or <Leader>cs
-local color = "default"
+local color = "retrobox"
 
 vim.g.mapleader = ' '
 vim.g.neovide_transparency = 0.95
@@ -434,7 +434,7 @@ require("lazy").setup({
 -- [ Keymaps, Hotkeys ]
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- custom snippet
-vim.keymap.set("n", ",py", ":-1read !./snip/snippet.python<CR>")
+vim.keymap.set("n", ",py", ":-1read !/home/me/.config/nvim/snip/snippet.python<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 vim.keymap.set("n", "<leader>c", vim.cmd.Ex, { desc = "Open the filemanager" })
