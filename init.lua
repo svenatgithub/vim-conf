@@ -59,7 +59,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", ",py", ":-1read !snip/snippet.python<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "<leader>c", vim.cmd.Ex, { desc = "Open the filemanager" })
+vim.keymap.set("n", "<leader>c", "<CMD>Oil<CR>", { desc = "Open the filemanager" })
 
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move marked text dow'})
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move marked text up'})
