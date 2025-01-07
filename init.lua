@@ -155,3 +155,9 @@ map('n', '<leader>sc', function()
     builtin.find_files { cwd = '/home/me/.config/'}
 end, { desc = 'Search in My Config Files' })
 
+local harpoon = require("harpoon")
+
+map("n", "<C-e>", function ()
+    harpoon.ui:toggle_quick_menu(harpoon:list())
+end, {desc = "Toggle the harpoon menu"})
+

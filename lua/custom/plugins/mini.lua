@@ -5,11 +5,11 @@ return {
                 enabled = true,
                 config = function()
                     local statusline = require 'mini.statusline'
-                    statusline.setup { use_icons = true }
+                    statusline.setup {
+                        use_icons = true,
+                        set_lsp_settings = false
+                    }
 
-                    statusline.section_location = function()
-                        return '%2l:%-2v'
-                    end
                 end,
 
         }
