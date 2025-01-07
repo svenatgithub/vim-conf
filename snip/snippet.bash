@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 read -r -d '' VAR << EOM
-#!/usr/bin/python3
+#!/usr/bin/bash
 ###
 ###
-### Project Name: 
+### Script Name: 
 ###
 ### Date: $(date '+%d-%m-%Y')
 ### By: Sven Ochmann
@@ -11,7 +11,5 @@ read -r -d '' VAR << EOM
 
 
 
-if __name__ == "__main__":
-    print("Grüß Gott")
 EOM
 echo "$VAR"
