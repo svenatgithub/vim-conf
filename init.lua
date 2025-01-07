@@ -89,8 +89,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 local map = vim.keymap.set
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- custom snippet
-map("n", ",py", ":-1read !snip/snippet.python<CR> 9kA")
-map("n", ",sh", ":-1read !snip/snippet.bash<CR> 9kA")
+map("n", ",py", ":-1read !".. vim.fn.getcwd() .."/snip/snippet.python<CR> 9kA")
+map("n", ",sh", ":-1read !".. vim.fn.getcwd() .."/snip/snippet.bash<CR> 4kA")
 
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
