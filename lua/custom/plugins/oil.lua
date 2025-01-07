@@ -16,10 +16,13 @@ return {
         ---@type oil.SetupOpts
         opts = {
             defaul_file_explorer = true,
-            skip_confirm_for_simple_edits = false,
+            skip_confirm_for_simple_edits = true,
         },
         win_options = {
            winbar = "%!v:lua.get_oil_winbar()",
+        },
+        view_options = {
+            show_hidden = true,
         },
         -- Optional dependencies
         dependencies = { { "echasnovski/mini.icons", opts = {} } },
